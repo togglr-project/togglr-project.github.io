@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://togglr-project.github.io/sitemap.xml

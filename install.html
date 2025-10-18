@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - Togglr</title>
+    <meta name="description" content="Learn how to install Togglr feature flag and experimentation platform. Quick installation with Docker or manual setup guide.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="./logo_icon.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="./logo_icon.png" alt="Togglr" class="logo-icon" width="48" height="48">
+                    <span>Togglr</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="install.html">Install</a></li>
+                        <li><a href="https://github.com/togglr-project/togglr" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                    </ul>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <h1 class="fade-in-up">Installation Guide</h1>
+                <p class="fade-in-up">Get Togglr up and running in minutes with our automated installer or follow the manual setup guide for custom configurations.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>System Requirements</h2>
+                    <div class="features-grid">
+                        <div class="card">
+                            <h4>Minimum Requirements</h4>
+                            <ul class="feature-list">
+                                <li>Linux or macOS</li>
+                                <li>Docker 20.10+</li>
+                                <li>Docker Compose 2.0+</li>
+                                <li>2GB RAM</li>
+                                <li>10GB free disk space</li>
+                                <li>Root/sudo access</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Recommended for Production</h4>
+                            <ul class="feature-list">
+                                <li>4GB+ RAM</li>
+                                <li>50GB+ free disk space</li>
+                                <li>SSL certificate (Let's Encrypt recommended)</li>
+                                <li>SMTP server for email notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Quick Installation</h2>
+                    <p class="text-secondary mb-4">The easiest way to install Togglr is using our automated installer script:</p>
+                    
+                    <div class="card">
+                        <h4>Option 1: Direct Download</h4>
+                        <div class="code-block">
+                            <code># Download and run the quick installer<br>
+curl -fsSL https://raw.githubusercontent.com/togglr-project/togglr/main/prod/install.sh | sudo bash</code>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>Option 2: Local Repository</h4>
+                        <div class="code-block">
+                            <code># Clone the repository<br>
+git clone https://github.com/togglr-project/togglr.git<br>
+cd togglr<br>
+sudo ./prod/quick_install.sh</code>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>What the installer does:</h4>
+                        <ul class="feature-list">
+                            <li>Checks system requirements (Docker, Docker Compose, OpenSSL, Make)</li>
+                            <li>Guides you through the configuration process</li>
+                            <li>Creates necessary directories and configuration files</li>
+                            <li>Generates SSL certificates (self-signed or use your existing ones)</li>
+                            <li>Sets up the complete Togglr platform</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Environment Variables</h2>
+                    <p class="text-secondary mb-4">For non-interactive installation, you can set environment variables:</p>
+                    
+                    <div class="code-block">
+                        <code>sudo TOGGLR_ADMIN_EMAIL=admin@example.com \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_DOMAIN=example.com \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_MAILER_ADDR=smtp.example.com:587 \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_MAILER_USER=admin@example.com \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_MAILER_PASSWORD=your_password \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_MAILER_FROM=noreply@example.com \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TOGGLR_HAS_SSL_CERT=false \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;./prod/install.sh</code>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="card">
+                            <h4>Required Variables</h4>
+                            <ul class="feature-list">
+                                <li><code>TOGGLR_ADMIN_EMAIL</code> - Administrator email</li>
+                                <li><code>TOGGLR_DOMAIN</code> - Platform domain</li>
+                                <li><code>TOGGLR_MAILER_ADDR</code> - SMTP server address</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Optional Variables</h4>
+                            <ul class="feature-list">
+                                <li><code>TOGGLR_MAILER_USER</code> - SMTP username (default: admin@domain)</li>
+                                <li><code>TOGGLR_MAILER_PASSWORD</code> - SMTP password (default: password)</li>
+                                <li><code>TOGGLR_MAILER_FROM</code> - Email sender address (default: noreply@domain)</li>
+                                <li><code>TOGGLR_HAS_SSL_CERT</code> - Whether you have existing SSL certificate (default: false)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Post-Installation</h2>
+                    <p class="text-secondary mb-4">After installation, the platform will be available at:</p>
+                    
+                    <div class="features-grid">
+                        <div class="card">
+                            <h4>Access Points</h4>
+                            <ul class="feature-list">
+                                <li><strong>Frontend:</strong> <code>https://your-domain</code></li>
+                                <li><strong>API:</strong> <code>https://your-domain/api/v1/</code></li>
+                                <li><strong>SDK:</strong> <code>https://your-domain/sdk/v1/</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Default Credentials</h4>
+                            <ul class="feature-list">
+                                <li><strong>Email:</strong> The administrator email you provided</li>
+                                <li><strong>Password:</strong> Temporary password (change on first login)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>Platform Management</h4>
+                        <div class="code-block">
+                            <code>cd /opt/togglr<br>
+make up    # Start the platform<br>
+make down  # Stop the platform<br>
+make pull  # Update Docker images</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Development Environment</h2>
+                    <p class="text-secondary mb-4">For developers who want to contribute or run Togglr locally:</p>
+                    
+                    <div class="card">
+                        <h4>Quick Start</h4>
+                        <div class="code-block">
+                            <code>git clone https://github.com/togglr-project/togglr.git<br>
+cd togglr<br>
+make setup<br>
+make dev-up</code>
+                        </div>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="card">
+                            <h4>Development URLs</h4>
+                            <ul class="feature-list">
+                                <li><strong>Frontend:</strong> <code>https://togglr.local</code></li>
+                                <li><strong>API:</strong> <code>https://togglr.local/api/v1/</code></li>
+                                <li><strong>SDK:</strong> <code>https://togglr.local/sdk/v1/</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Default Credentials</h4>
+                            <ul class="feature-list">
+                                <li><strong>Email:</strong> <code>admin@togglr.dev</code></li>
+                                <li><strong>Password:</strong> <code>password543210</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Troubleshooting</h2>
+                    <div class="features-grid">
+                        <div class="card">
+                            <h4>Installation Issues</h4>
+                            <ul class="feature-list">
+                                <li>Ensure you're running in an interactive terminal</li>
+                                <li>Check that you have sudo/root privileges</li>
+                                <li>Try running with environment variables for non-interactive mode</li>
+                                <li>Add your user to docker group: <code>sudo usermod -aG docker $USER</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>SSL Certificate Issues</h4>
+                            <ul class="feature-list">
+                                <li>For production, use Let's Encrypt or a trusted CA certificate</li>
+                                <li>Place certificate files at <code>/opt/togglr/nginx/ssl/nginx_cert.pem</code></li>
+                                <li>Place key file at <code>/opt/togglr/nginx/ssl/nginx_key.pem</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Database Issues</h4>
+                            <ul class="feature-list">
+                                <li>Check if PostgreSQL container is running: <code>docker ps</code></li>
+                                <li>Verify database credentials in <code>/opt/togglr/config.env</code></li>
+                                <li>Check logs: <code>docker logs togglr-postgresql</code></li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Reset Admin Password</h4>
+                            <ul class="feature-list">
+                                <li>Edit <code>/opt/togglr/config.env</code> and change <code>ADMIN_TMP_PASSWORD</code></li>
+                                <li>Restart: <code>make down && make up</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Need Help?</h2>
+                    <p class="text-secondary mb-4">If you encounter any issues during installation:</p>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/togglr-project/togglr/issues" class="btn btn-primary" target="_blank" rel="noopener">Report an Issue</a>
+                        <a href="https://github.com/togglr-project/togglr/discussions" class="btn btn-secondary" target="_blank" rel="noopener">Community Discussions</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Togglr Project. Open source feature flag and experimentation platform.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', currentTheme);
+        
+        // Update theme toggle icon
+        function updateThemeIcon(theme) {
+            const svg = themeToggle.querySelector('svg path');
+            if (theme === 'light') {
+                // Moon icon for light theme
+                svg.setAttribute('d', 'M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z');
+            } else {
+                // Sun icon for dark theme
+                svg.setAttribute('d', 'M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z');
+            }
+        }
+        
+        updateThemeIcon(currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        // Add fade-in animation to elements as they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .section-content').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
